@@ -1,6 +1,10 @@
 # Weather Dashboard 
 
+# Webpage Link
+
 # Description
+
+# Screenshot/GIF
 
 # User Story 
 - AS A traveler
@@ -23,3 +27,4 @@
 # Built With
 - HTML
 - OpenWeatherMap API
+
