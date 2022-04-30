@@ -74,7 +74,7 @@ function currentConditionsRequest(searchValue) {
         }).then(function(response) {
                 console.log(response);
                 currentCity.text(response.name);
-                currentCity.append("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='" + response.weather[0].main + "' />" )
+                currentCity.append("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='" + response.weather[0].main + "' />" )
                 currentTemp.text(response.main.temp);
                 currentTemp.append("&deg;F");
                 currentHumidity.text(response.main.humidity + "%");
@@ -122,7 +122,7 @@ function currentConditionsRequest(searchValue) {
                                 forecastCardBody.append(forecastTemp);
                                 forecastCardBody.append(forecastHumidity);
 
-                                forecastIcon.attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
+                                forecastIcon.attr("src", "https://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
                                 forecastIcon.attr("alt", response.list[i].weather[0].main)
                                 forecastDate.text(response.list[i].dt_txt);
                                 forecastTemp.text(response.list[i].main.temp);
