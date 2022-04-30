@@ -11,6 +11,9 @@ var queryURL = "https://api.openweathermap.org/data/2.5/weather?" + APIkey;
 // Easy access to data
 var cityList = [];
 
+// Check if search history is present when page loads
+initalizeHistory();
+showClear();
 
 // $.ajax({
 //     url: ,
@@ -24,6 +27,7 @@ var cityList = [];
 $(document).on("submit", function(event) {
         event.preventDefault();
         searchHistory();
+        searchCityInput.val("");
 })
 
 // Clicking the search button will trigger
@@ -31,6 +35,17 @@ $(document).on("submit", function(event) {
 searchCityButton.on("click", function(event) {
         event.preventDefault();
         searchHistory();
+        searchCityInput.val("");
+});
+
+// Clear search history
+clearHistoryButton.on("click", function() {
+        // Empty list array
+        cityList = [];
+        // Update city list history in local storage
+        listArray();
+
+        $(this).addClass("hide");
 });
 
 function searchHistory() {
@@ -46,6 +61,7 @@ function searchHistory() {
 
                         // List all cities entered in search history
                         listArray();
+                        clearHistoryButton.removeClass("hide");
                 } else {
                         // Remove the existing value from the array
                         var removeIndex = cityList.indexOf(searchValue);
@@ -56,6 +72,7 @@ function searchHistory() {
 
                         // List all cities in search history so old entry appears at the top of history
                         listArray();
+                        clearHistoryButton.removeClass("hide");
                 }
         }
         console.log(cityList);
@@ -70,7 +87,28 @@ function listArray () {
                 searchHistoryItem.text(city);
                 searchHistoryList.prepend(searchHistoryItem);
         });
+        // Update city list history in local storage
+        localStorage.setItem("cities", JSON.stringify(cityList));
 }
+
+// Grab city list string from local storage and update list array
+function initalizeHistory() {
+        if (localStorage.getItem("cities")) {
+                cityList = JSON.parse(localStorage.getItem("cities"));
+                console.log(cityList);
+                listArray();
+        }
+}
+
+// Check to see if there are elements in
+// search history sidebar in order to show clear history btn
+function showClear() {
+                if (searchHistoryList.text() !== "") {
+                        clearHistoryButton.removeClass("hide");
+                }
+        }
+        // console.log(searchHistoryList.text());
+
 console.log(cityList);
 
 
