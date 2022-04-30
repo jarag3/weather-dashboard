@@ -14,28 +14,33 @@
 
 <!-- Start Webpage Body -->
 <body>
-    <main>
-        <header class="container-fluid text-center text-white bg-dark p-2">
-            <h1>Weather Dashboard</h1>
-        </header>
-    
-        <div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row navbar navbar-dark bg-dark">
+            <div class="col-12 text-center">
+                <h1 class="navbar-brand pb-0 px-0">Weather Dashboard</h1>
+            </div>
+        </div>
             <div class="row content-row">
                 <div class="col-3 bg-light pt-3">
                     <h5>Search for a City:</h5>
-                    <div class="form-inline form-group">
-                        <input class="form-control" type="text" id="search-city" placeholder="Enter city here"/>
-                        <button type="button" class="btn btn-outline-primary" id="search-city-button">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
+                    <form>
+                        <div class="form-inline form-group input-group">
+                            <input class="form-control" type="text" id="search-city" placeholder="Enter city here"/>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-info btn-outline-primary" id="search-city-button">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
                     <!-- Search History -->
                     <div class="card">
                         <ul class="list-group list-group-flush" id="search-history-list">
 
                             <!-- <li class="list-group-item></li>" -->
                         </ul>
-                        <button id="clear-history" class="btn btn-sm btn-secondary-hide">Clear History</button>
+                        <button id="clear-history" class="btn btn-sm btn-secondary-hide">
                     </div>
                 </div>    
                 <div class="col-9">
@@ -68,13 +73,10 @@
             </div>
         </div>
 
-
-
-    </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha512-i2CVnAiguN6SnJ3d2ChOOddMWQyvgQTzm0qSgiKhOqBMGCx4fGU5BtzXEybnKatWPDkXPFyCI0lbG42BnVjr/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./assets/js/script.js"></script>
-    <script src="https://kit.fontawesome.com/8027af7c3b.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha512-i2CVnAiguN6SnJ3d2ChOOddMWQyvgQTzm0qSgiKhOqBMGCx4fGU5BtzXEybnKatWPDkXPFyCI0lbG42BnVjr/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./assets/js/script.js"></script>
+        <script src="https://kit.fontawesome.com/8027af7c3b.js" crossorigin="anonymous"></script>
 </body>
 <!-- End Webpage Body -->
 </html>
