@@ -3,6 +3,10 @@ var searchHistoryList = $('#search-history-list');
 var searchCityInput = $("#search-city");
 var searchCityButton = $("#search-city-button");
 var clearHistoryButton = $("#clear-history");
+var currentCity = $("#current-city");
+var currentTemp = $("#current-temp");
+var currentHumidity = $("#current-humidity");
+var currentWindSpeed = $("#current-wind-speed");
 
 // Get access to the OpenWeather API
 var APIkey = "e80c86cddae3e0f811424e1f7df7c059"
@@ -15,17 +19,14 @@ var cityList = [];
 initalizeHistory();
 showClear();
 
-// $.ajax({
-//     url: ,
-//     method: "GET"
-// }).then(function(response){
-
-// });
-
 // Hitting enter while input is focused will trigger
 // value added to search history
 $(document).on("submit", function(event) {
         event.preventDefault();
+
+        // grab value entered into search
+        var searchValue = searchCityInput.val().trim();
+        currentConditionsRequest(searchValue)
         searchHistory();
         searchCityInput.val("");
 })
@@ -34,6 +35,10 @@ $(document).on("submit", function(event) {
 // value added to search history
 searchCityButton.on("click", function(event) {
         event.preventDefault();
+
+        // grab value entered into search
+        var searchValue = searchCityInput.val().trim();
+        currentConditionsRequest(searchValue)
         searchHistory();
         searchCityInput.val("");
 });
@@ -48,6 +53,24 @@ clearHistoryButton.on("click", function() {
         $(this).addClass("hide");
 });
 
+// Request OpenWeather API
+function currentConditionsRequest(searchValue) {
+        // Formulate URL for AJAX api call
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial&appid=" + APIkey;
+        // AJAX call
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+        }).then(function(response) {
+                console.log(response);
+                currentCity.text(response.name);
+                currentTemp.text(response.main.temp);
+                currentHumidity.text(response.main.humidity);
+                currentWindSpeed.text(response.wind.speed);
+        });
+}
+
+// Display and save search history
 function searchHistory() {
         // Grab value entered in search bar
         var searchValue = searchCityInput.val().trim();
@@ -75,7 +98,7 @@ function searchHistory() {
                         clearHistoryButton.removeClass("hide");
                 }
         }
-        console.log(cityList);
+        // console.log(cityList);
 }
 
 // list array into search history 
@@ -109,7 +132,7 @@ function showClear() {
         }
         // console.log(searchHistoryList.text());
 
-console.log(cityList);
+// console.log(cityList);
 
 
 
