@@ -56,10 +56,11 @@ clearHistoryButton.on("click", function() {
 
 // Clicking on a button in the search history
 // will fill the dashboard with info about the city
-$('.city-btn').on("click", function() {
+searchHistoryList.on("click", "li.city-btn", function(event) {
         // console.log($(this).data("value"));
         var value = $(this).data("value");
         currentConditionsRequest(value);
+        searchHistory(value);
 });
 
 // Request OpenWeather API
@@ -71,7 +72,7 @@ function currentConditionsRequest(searchValue) {
                 url: queryURL,
                 method: "GET"
         }).then(function(response) {
-                // console.log(response);
+                console.log(response);
                 currentCity.text(response.name);
                 currentTemp.text(response.main.temp);
                 currentTemp.append("&deg;F");
@@ -80,6 +81,7 @@ function currentConditionsRequest(searchValue) {
 
                 var lat = response.coord.lat;
                 var lon = response.coord.lon;
+                var countryCode = response;
 
                 var UVurl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
                 $.ajax({
@@ -91,7 +93,7 @@ function currentConditionsRequest(searchValue) {
                         UVindex.text(response.value);
                 });
         });
-}
+};
 
 // Display and save search history
 function searchHistory(searchValue) {
@@ -154,6 +156,3 @@ function showClear() {
                         clearHistoryButton.removeClass("hide");
                 }
         }
-        // console.log(searchHistoryList.text());
-
-// console.log(cityList);
