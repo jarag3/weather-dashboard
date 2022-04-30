@@ -144,8 +144,11 @@ function listArray () {
 function initalizeHistory() {
         if (localStorage.getItem("cities")) {
                 cityList = JSON.parse(localStorage.getItem("cities"));
-                console.log(cityList);
+                var lastIndex = cityList.length - 1;
+                // console.log(cityList);
                 listArray();
+                // display the last city viewed if page is refreshed
+                currentConditionsRequest(cityList[lastIndex]);
         }
 }
 
