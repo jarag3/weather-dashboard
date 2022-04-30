@@ -7,6 +7,7 @@ var currentCity = $("#current-city");
 var currentTemp = $("#current-temp");
 var currentHumidity = $("#current-humidity");
 var currentWindSpeed = $("#current-wind-speed");
+var UVindex = $("#uv-index");
 
 // Get access to the OpenWeather API
 var APIkey = "e80c86cddae3e0f811424e1f7df7c059"
@@ -53,6 +54,14 @@ clearHistoryButton.on("click", function() {
         $(this).addClass("hide");
 });
 
+// Clicking on a button in the search history
+// will fill the dashboard with info about the city
+$('.city-btn').on("click", function() {
+        // console.log($(this).data("value"));
+        var value = $(this).data("value");
+        currentConditionsRequest(value);
+});
+
 // Request OpenWeather API
 function currentConditionsRequest(searchValue) {
         // Formulate URL for AJAX api call
@@ -62,18 +71,32 @@ function currentConditionsRequest(searchValue) {
                 url: queryURL,
                 method: "GET"
         }).then(function(response) {
-                console.log(response);
+                // console.log(response);
                 currentCity.text(response.name);
                 currentTemp.text(response.main.temp);
-                currentHumidity.text(response.main.humidity);
-                currentWindSpeed.text(response.wind.speed);
+                currentTemp.append("&deg;F");
+                currentHumidity.text(response.main.humidity + "%");
+                currentWindSpeed.text(response.wind.speed + "MPH");
+
+                var lat = response.coord.lat;
+                var lon = response.coord.lon;
+
+                var UVurl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
+                $.ajax({
+                        url: UVurl,
+                        method: "GET"
+                }).then(function(response) {
+                        console.log("UV call: ")
+                        console.log(response);
+                        UVindex.text(response.value);
+                });
         });
 }
 
 // Display and save search history
-function searchHistory() {
+function searchHistory(searchValue) {
         // Grab value entered in search bar
-        var searchValue = searchCityInput.val().trim();
+        // var searchValue = searchCityInput.val().trim();
 
         // If characters are entered into search bar then
         if (searchValue) {
@@ -106,7 +129,8 @@ function listArray () {
         // empty elements 
         searchHistoryList.empty();
         cityList.forEach(function(city) {
-                var searchHistoryItem = $('<li class="list-group-item">');
+                var searchHistoryItem = $('<li class="list-group-item city-btn">');
+                searchHistoryItem.attr("data-value", city);
                 searchHistoryItem.text(city);
                 searchHistoryList.prepend(searchHistoryItem);
         });
@@ -133,45 +157,3 @@ function showClear() {
         // console.log(searchHistoryList.text());
 
 // console.log(cityList);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// test API call
-// var APIKey = "e80c86cddae3e0f811424e1f7df7c059"
-// var currentWeather = [];
-// var excludeAlerts = 'Alerts';
-// var cityLat;
-// var cityLong;
-
-// var testWeatherAPI = function() {
-//     currentWeather = `https://api.openweathermap.org/data/2.5/weather?lat=38.581573&lon=-121.494400&appid=e80c86cddae3e0f811424e1f7df7c059`;
-//     console.log(currentWeather);
-// };
-
