@@ -27,13 +27,14 @@ showClear();
 
 // Hitting enter while input is focused will trigger
 // value added to search history
-$(document).on("submit", function() {
+$(document).on("submit", function(event) {
         event.preventDefault();
 
         // grab value entered into search
         var searchValue = searchCityInput.val().trim();
+        
         currentConditionsRequest(searchValue)
-        searchHistory();
+        searchHistory(searchValue);
         searchCityInput.val("");
 })
 
@@ -44,8 +45,9 @@ searchCityButton.on("click", function(event) {
 
         // grab value entered into search
         var searchValue = searchCityInput.val().trim();
+
         currentConditionsRequest(searchValue)
-        searchHistory();
+        searchHistory(searchValue);
         searchCityInput.val("");
 });
 
