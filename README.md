@@ -4,8 +4,8 @@
 https://jarag3.github.io/weather-dashboard/
 # Description
 A weather dashboard application with a search functionality that outputs the current weather conditions and future as far as 5 days.
-# Screenshot/GIF
-![weather](./assets/images/demo-weather-dashoboard.gif.mp4)
+# Screenshot
+![weather](./assets/images/weather-dasboard-sc.png)
 # User Story 
 - AS A traveler
 - I WANT to see the weather outlook for multiple cities
