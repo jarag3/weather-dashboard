@@ -12,7 +12,7 @@ var weatherContent = $("#weather-content");
 
 // Get access to the OpenWeather API
 var APIkey = "e80c86cddae3e0f811424e1f7df7c059"
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?" + APIkey;
+// var queryURL = "https://api.openweathermap.org/data/2.5/weather?" + APIkey;
 
 // Easy access to data
 var cityList = [];
@@ -66,7 +66,7 @@ clearHistoryButton.on("click", function() {
 searchHistoryList.on("click", "li.city-btn", function(event) {
         // console.log($(this).data("value"));
         var value = $(this).data("value");
-        currentConditionsRequest(value);
+        currentConditionsRequest(searchValue);
         searchHistory(value);
 });
 
@@ -92,7 +92,7 @@ function currentConditionsRequest(searchValue) {
                 var lat = response.coord.lat;
                 var lon = response.coord.lon;
 
-                var UVurl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
+                var UVurl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly" + "&appid=" + APIkey;
                 // Ajax call for UV index
                 $.ajax({
                         url: UVurl,
@@ -100,7 +100,7 @@ function currentConditionsRequest(searchValue) {
                 }).then(function(response) {
                         // console.log("UV call: ")
                         // console.log(response);
-                        UVindex.text(response.value);
+                        UVindex.text(response.current.uvi);
                 });
 
                 var countryCode = response.sys.country;
