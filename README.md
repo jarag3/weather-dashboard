@@ -1,11 +1,11 @@
 # Weather Dashboard 
 
 # Webpage Link
-
+https://jarag3.github.io/weather-dashboard/
 # Description
-
-# Screenshot/GIF
-
+A weather dashboard application with a search functionality that outputs the current weather conditions and future as far as 5 days.
+# Screenshot
+![weather](./assets/images/weather-dasboard-sc.png)
 # User Story 
 - AS A traveler
 - I WANT to see the weather outlook for multiple cities
@@ -25,6 +25,8 @@
 - THEN I am again presented with current and future conditions for that city
 
 # Built With
-- HTML
+- Javascript
+- jQuery
 - OpenWeatherMap API
-
+- Bootstrap
+- FontAwesome
